@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+DB_SERVER: 
+DB_NAME: 
+DB_USER: 
+DB_PASSWD: 
+PS_DEV_MODE: '1'
+PS_DEMO_MODE: '1'
+PS_INSTALL_AUTO: '1'
+PS_DOMAIN: 
+PS_FOLDER_ADMIN: 
+ADMIN_MAIL:
+ADMIN_PASSWD: 
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    app-configmap: prestashop-env
+  name: prestashop-env

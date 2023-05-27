@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prestashop
+  annotations:
+  creationTimestamp: null
+  labels:
+    app: prestashop  
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: prestashop 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:    
+      labels:
+        app: prestashop
+      creationTimestamp: null
+    spec:
+      containers:
+        - env:
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_SERVER
+                  name: prestashop-env
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_NAME
+                  name: prestashop-env
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_USER
+                  name: prestashop-env
+            - name: DB_PASSWD
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PASSWD
+                  name: prestashop-env
+            - name: PS_DEV_MODE
+              valueFrom:
+                configMapKeyRef:
+                  key: PS_DEV_MODE
+                  name: prestashop-env
+            - name: PS_DEMO_MODE
+              valueFrom:
+                configMapKeyRef:
+                  key: PS_DEMO_MODE
+                  name: prestashop-env
+            - name: PS_INSTALL_AUTO
+              valueFrom:
+                configMapKeyRef:
+                  key: PS_INSTALL_AUTO
+                  name: prestashop-env
+            - name: PS_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  key: PS_DOMAIN
+                  name: prestashop-env
+            - name: PS_FOLDER_ADMIN
+              valueFrom:
+                configMapKeyRef:
+                  key: PS_FOLDER_ADMIN
+                  name: prestashop-env
+            - name: ADMIN_MAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: ADMIN_MAIL
+                  name: prestashop-env
+            - name: ADMIN_PASSWD
+              valueFrom:
+                configMapKeyRef:
+                  key: ADMIN_PASSWD
+                  name: prestashop-env
+          image: prestashop/prestashop:8-apache
+          imagePullPolicy: IfNotPresent
+          name: prestashop
+          ports:
+            - containerPort: 80
+              name: 80tcp
+              protocol: TCP
+          resources: {}
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+status: {}
