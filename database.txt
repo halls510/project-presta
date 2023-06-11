@@ -1,0 +1,9 @@
+https://devdocs.prestashop-project.org/8/basics/installation/localhost/
+
+No Banco de dados para conta de usuário, selecione Criar banco de dados e Conceder todos os privilégios
+Crie usuário e banco de dados e verifique se o COLLATION do seu banco de dados é utf8mb4_general_ci
+
+
+> CREATE DATABASE prestashop COLLATE utf8mb4_general_ci;
+> CREATE USER "prestashopuser"@"hostname" IDENTIFIED BY "somepassword";
+> GRANT ALL PRIVILEGES ON prestashop.* TO "prestashopuser"@"hostname";
